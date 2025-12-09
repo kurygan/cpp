@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 03:10:11 by mkettab           #+#    #+#             */
-/*   Updated: 2025/12/09 03:10:12 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/12/09 03:28:56 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 PhoneBook::PhoneBook(){
 	std::cout << "\033c\033[1;37mWelcome to your OWN PhoneBook!\033[0m" << std::endl
-	<< "Please input your command: ADD, SEARCH, EXIT" << std::endl << std::endl;
+	<< "Please input your command: ADD, SEARCH, EXIT\n" << std::endl;
 	this->_index = 0;
 	this->_count = 0;
 	return;
@@ -23,10 +23,10 @@ PhoneBook::~PhoneBook(){
 	return;
 }
 
-Contact	PhoneBook::getContact(int index) const{
+Contact	PhoneBook::_getContact(int index) const{
 	return this->_contacts[index - 1];
 }
-int		PhoneBook::getCount() const{
+int		PhoneBook::_getCount() const{
 	return this->_count;
 }
 void	PhoneBook::addContact(){
@@ -49,6 +49,23 @@ void	PhoneBook::addContact(){
 		continue;
 	contact.setSecret(string);
 	PhoneBook::_setContact(contact);
+}
+
+void	PhoneBook::_printContact(int index){
+	std::string string;
+	if (index >= 0 && index <= _count){
+		string = this->_contacts[index].getFirstName();
+		std::cout << string << std::endl;
+	}
+}
+
+
+void	PhoneBook::searchContact(){
+	std::string	in;
+	int			index;
+	lineToString("Coucou! Dis moi le contact que tu veux voir! ntgrm ^^", in, false);
+	index = converter<int>(in);
+	PhoneBook::_printContact(index);
 }
 
 void	PhoneBook::_setContact(Contact contact){

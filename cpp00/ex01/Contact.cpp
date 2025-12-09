@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 03:10:22 by mkettab           #+#    #+#             */
-/*   Updated: 2025/12/09 03:10:23 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/12/09 03:17:02 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ Contact::~Contact(){
 	return;
 }
 
-std::string Contact::getFirstName(){
+std::string Contact::getFirstName() const{
 	return this->_firstName;
 }
-std::string Contact::getLastName(){
+std::string Contact::getLastName() const{
 	return this->_lastName;
 }
-std::string Contact::getNickname(){
+std::string Contact::getNickname() const{
 	return this->_nickname;
 }
-std::string Contact::getPhoneNum(){
+std::string Contact::getPhoneNum() const{
 	return this->_phoneNum;
 }
-std::string Contact::getSecret(){
+std::string Contact::getSecret() const{
 	return this->_secret;
 }
 
