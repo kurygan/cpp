@@ -24,15 +24,18 @@ class PhoneBook{
 		void	searchContact();
 
 	private:
-		Contact	_contacts[8];
-		int		_count;
-		int		_index;
-		void	_setContact(Contact contact);
-		void	_printContact(int index);
-		Contact	_getContact(int index) const;
-		int		_getCount() const;
+		Contact		_contacts[8];
+		int			_count;
+		int			_index;
+		void		_setContact(Contact contact);
+		void		_printContact(int index);
+		Contact		_getContact(int index) const;
+		int			_getCount() const;
+		bool		_addContactLine(const std::string &prompt, std::string &in);
+		std::string	_genWSpace(size_t num);
+		std::string	_verifLen(std::string string);
 };
 
-bool	lineToString(const std::string prompt, std::string &input, const bool isNum);
+int		lineToString(const std::string prompt, std::string &input, const bool isNum);
 
 #endif
