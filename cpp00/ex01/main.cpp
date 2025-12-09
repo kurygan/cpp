@@ -1,8 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/09 03:10:17 by mkettab           #+#    #+#             */
+/*   Updated: 2025/12/09 03:13:41 by mkettab          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "PhoneBook.hpp"
 
 int main(){
-	std::cout << "\033c\033[1;37mWelcome to your PhoneBook!\033[0m" << std::endl
-	<< std::endl << "Please put your command: ADD, SEARCH, EXIT" << std::endl;
+	PhoneBook phoneBook;
+	std::string	choice;
 
+	do {
+		if (lineToString("[$] ", choice, false)){
+			if (choice == "ADD")
+				phoneBook.addContact();
+		}
+	} while (choice != "EXIT");
 	return 0;
 }
