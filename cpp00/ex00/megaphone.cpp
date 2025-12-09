@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 22:43:36 by mkettab           #+#    #+#             */
-/*   Updated: 2025/12/04 22:55:23 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/12/09 02:32:25 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	main(int ac, char **av){
 		++av;
 		while (*av){
 			std::string str(*av);
-			for (size_t i = 0; i < str.length(); i++)
+			for (size_t i = 0; i < str.length(); ++i)
 				std::cout << (char)std::toupper(str[i]);
 			av++;
 		}
