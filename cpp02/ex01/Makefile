@@ -1,7 +1,7 @@
 FLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
-NAME = Harl
-SRCS = main.cpp Harl.cpp
+NAME = Fixed
+SRCS = Fixed.cpp main.cpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
