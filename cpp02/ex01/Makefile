@@ -1,7 +1,7 @@
 FLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
-NAME = PhoneBook
-SRCS = Contact.cpp PhoneBook.cpp lineToString.cpp main.cpp
+NAME = Fixed
+SRCS = Fixed.cpp main.cpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 

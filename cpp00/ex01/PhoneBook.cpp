@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 03:10:11 by mkettab           #+#    #+#             */
-/*   Updated: 2025/12/09 22:46:30 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/12/15 02:16:54 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ void	PhoneBook::addContact(){
 	if (!PhoneBook::_addContactLine("Add Nickname: ", string))
 		return;
 	contact.setNickname(string);
-	if (!PhoneBook::_addContactLine("Add Phone Number: ", string))
-		return;
+	while (lineToString("Add Phone Number: ", string, true) == 0)
+		continue;
 	contact.setPhoneNum(string);
 	if (!PhoneBook::_addContactLine("Add Darkest Secret: ", string))
 		return;
