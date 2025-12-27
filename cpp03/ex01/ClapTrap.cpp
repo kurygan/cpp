@@ -6,7 +6,7 @@
 /*   By: mkettab <mkettab@student.42mulhouse.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/27 00:03:35 by mkettab           #+#    #+#             */
-/*   Updated: 2025/12/27 02:25:02 by mkettab          ###   ########.fr       */
+/*   Updated: 2025/12/27 02:47:24 by mkettab          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ClapTrap::takeDamage(unsigned int amount) {
 		this->_hitPoints = 0;
 	}
 	else {
-		std::cout << this->_name << " took " << i << " damage!" << std::endl;
+		std::cout << this->_name << " took " << amount << " damage!" << std::endl;
 		this->_hitPoints -= amount;
 	}
 }
