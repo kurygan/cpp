@@ -1,7 +1,7 @@
 FLAGS = -Wall -Wextra -Werror -std=c++98
 CC = c++
 NAME = Animal
-SRCS = WrongAnimal.cpp WrongCat.cpp Animal.cpp Cat.cpp Dog.cpp main.cpp
+SRCS = Brain.cpp Animal.cpp Cat.cpp Dog.cpp main.cpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
