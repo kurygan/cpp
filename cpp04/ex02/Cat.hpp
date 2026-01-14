@@ -9,8 +9,8 @@ class Cat: public Animal {
 	public:
 		Cat();
 		~Cat();
-		Cat(const Cat &copy);
-		Cat		&operator=(const Cat &copy);
+		Cat(Cat const &copy);
+		Cat		&operator=(Cat const &copy);
 
 		void	makeSound() const;
 		Brain	getBrain() const;
