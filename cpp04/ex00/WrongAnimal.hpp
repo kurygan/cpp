@@ -3,14 +3,14 @@
 #	include <iostream>
 #	include <string>
 
-class Animal {
+class WrongAnimal {
 	protected:
 		std::string		type;
 	public:
-		Animal();
-		Animal(Animal const &copy);
-		virtual ~Animal();
-		Animal			operator=(Animal const &copy);
+		WrongAnimal();
+		WrongAnimal(WrongAnimal const &copy);
+		virtual ~WrongAnimal();
+		WrongAnimal			operator=(WrongAnimal const &copy);
 
 		void	makeSound() const;
 		std::string		getType() const;
