@@ -5,7 +5,11 @@ Dog::Dog() {
 	this->type = "Dog";
 	std::cout << "Dog default constructor called" << std::endl;
 }
-Dog::Dog(const Dog &copy) : Animal(copy) {*this = copy; std::cout << "Dog copy constructor called" << std::endl;}
+Dog::Dog(const Dog &copy) : Animal(copy) {
+	this->_brain = NULL;
+	*this = copy;
+	std::cout << "Dog copy constructor called" << std::endl;
+}
 Dog::~Dog() {delete this->_brain; std::cout << "Dog destructor called" << std::endl;}
 
 Dog		&Dog::operator=(const Dog &copy) {
