@@ -40,15 +40,15 @@ bool isFloat(std::string param){
 bool minConvert() {
 	std::cout << "char: non-displayable" << std::endl;
 	std::cout << "int: " << std::numeric_limits<int>::min() << std::endl;
-	std::cout << "double: " << std::fixed << DBL_MIN << std::endl;
-	std::cout << "float: " << std::fixed << FLT_MIN << "f" << std::endl;
+	std::cout << "double: " << std::setprecision(1) << std::fixed << std::numeric_limits<double>::min() << std::endl;
+	std::cout << "float: " << std::setprecision(1) << std::fixed << std::numeric_limits<float>::min() << "f" << std::endl;
 	return true;
 }
 bool maxConvert() {
 	std::cout << "char: non-displayable" << std::endl;
 	std::cout << "int: " << std::numeric_limits<int>::max() << std::endl;
-	std::cout << "double: " << std::fixed << std::numeric_limits<double>::max() << std::endl;
-	std::cout << "float: " << std::fixed << std::numeric_limits<float>::max() << "f" << std::endl;
+	std::cout << "double: " << std::setprecision(1) << std::fixed << std::numeric_limits<double>::max() << std::endl;
+	std::cout << "float: " << std::setprecision(1) << std::fixed << std::numeric_limits<float>::max() << "f" << std::endl;
 	return true;
 }
 bool nanConvert() {
@@ -69,8 +69,8 @@ bool isSpecial(std::string param){
 void ScalarConverter::convert(std::string param) {
 	if (isChar(param)) printConverter(static_cast<char>(param[0]));
 	else if (isInt(param)) printConverter(static_cast<long long>(atoll(param.c_str())));
-	else if (isDouble(param)) printConverter(static_cast<double>(std::atof(param.c_str())));
-	else if (isFloat(param)) printConverter(static_cast<float>(std::atof(param.c_str())));
+	else if (isDouble(param)) printConverter(static_cast<double>(atof(param.c_str())));
+	else if (isFloat(param)) printConverter(static_cast<float>(atof(param.c_str())));
 	else if (isSpecial(param));
 	else std::cerr << "Error, Use: ./converter [num or char]" << std::endl;
 }

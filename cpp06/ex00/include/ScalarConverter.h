@@ -5,6 +5,7 @@
 #	include <limits>
 #	include <iomanip>
 #	include <cfloat>
+#	include <cstdlib>
 
 template <typename T>
 void printConverter(T value){
