@@ -1,7 +1,7 @@
 #include "ScalarConverter.h"
 
 bool isInt(std::string param){
-	for (int i = 0; i < param.length(); i++)
+	for (size_t i = 0; i < param.length(); i++)
 		if (!std::isdigit(param[i]))
 			return false;
 	return true;
@@ -13,7 +13,7 @@ bool isChar(std::string param){
 }
 bool isDouble(std::string param){
 	size_t dotPos = param.find('.');
-	if (dotPos != -1 && param.find('.', dotPos + 1) == -1) {
+	if (dotPos != param.npos && param.find('.', dotPos + 1) == param.npos) {
 		for (size_t i = 0; i < param.length(); i++) {
 			if (!std::isdigit(param[i]) && param[i] != '.')
 				return false;
@@ -24,7 +24,7 @@ bool isDouble(std::string param){
 }
 bool isFloat(std::string param){
 	size_t dotPos = param.find('.');
-	if (dotPos != -1 && param.find('.', dotPos + 1) == -1) {
+	if (dotPos != param.npos && param.find('.', dotPos + 1) == param.npos) {
 		size_t i = 0;
 		while (i < param.length() - 1) {
 			if (!std::isdigit(param[i]) && param[i] != '.')
@@ -40,8 +40,8 @@ bool isFloat(std::string param){
 bool minConvert() {
 	std::cout << "char: non-displayable" << std::endl;
 	std::cout << "int: " << std::numeric_limits<int>::min() << std::endl;
-	std::cout << "double: " << std::fixed << std::numeric_limits<double>::min() << std::endl;
-	std::cout << "float: " << std::fixed << std::numeric_limits<float>::min() << "f" << std::endl;
+	std::cout << "double: " << std::fixed << DBL_MIN << std::endl;
+	std::cout << "float: " << std::fixed << FLT_MIN << "f" << std::endl;
 	return true;
 }
 bool maxConvert() {
@@ -68,6 +68,9 @@ bool isSpecial(std::string param){
 
 void ScalarConverter::convert(std::string param) {
 	if (isChar(param)) printConverter(static_cast<char>(param[0]));
-	else if (isInt(param)) printConverter(static_cast<int>(atoi(param.c_str()));
-	else if ()
+	else if (isInt(param)) printConverter(static_cast<long long>(atoll(param.c_str())));
+	else if (isDouble(param)) printConverter(static_cast<double>(std::atof(param.c_str())));
+	else if (isFloat(param)) printConverter(static_cast<float>(std::atof(param.c_str())));
+	else if (isSpecial(param));
+	else std::cerr << "Error, Use: ./converter [num or char]" << std::endl;
 }
