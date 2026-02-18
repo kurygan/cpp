@@ -1,12 +1,12 @@
 FLAGS = -Wall -Wextra -Werror -std=c++98
 CC = g++
 INCLUDE = -Iinclude/
-NAME = serializer
+NAME = identify
 
 SRC_DIR = src/
 OBJ_DIR = .bin/
 
-CLASS = Data.cpp Serializer.cpp
+CLASS = Base.cpp
 SRCS = main.cpp $(addprefix $(SRC_DIR), $(CLASS))
 
 OBJS = $(addprefix $(OBJ_DIR), $(notdir $(SRCS:%.cpp=%.o)))
