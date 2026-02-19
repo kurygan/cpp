@@ -1,59 +1,60 @@
 #include <iostream>
 #include <string>
-#include "template.h" // Remplace par le nom de ton header
+#include "template.h"
+#define GREEN "\033[1;32m"
+#define RES "\033[0m"
 
-// --- Petite classe de test façon "Moulitest" ---
-// Cette classe sert à vérifier que tes templates marchent avec des objets complexes,
-// à condition que ces objets aient bien surchargé les opérateurs de comparaison !
-class Awesome {
-public:
-    Awesome(int n) : _n(n) {}
-    
-    // On surcharge les opérateurs pour que ::min et ::max puissent comparer deux 'Awesome'
-    bool operator==(Awesome const & rhs) const { return (this->_n == rhs._n); }
-    bool operator!=(Awesome const & rhs) const { return (this->_n != rhs._n); }
-    bool operator>(Awesome const & rhs) const { return (this->_n > rhs._n); }
-    bool operator<(Awesome const & rhs) const { return (this->_n < rhs._n); }
-    bool operator>=(Awesome const & rhs) const { return (this->_n >= rhs._n); }
-    bool operator<=(Awesome const & rhs) const { return (this->_n <= rhs._n); }
-    
-    int get_n() const { return _n; }
+class Class {
+	private:
+		int _num;
+	public:
+		Class(int n): _num(n) {}
 
-private:
-    int _n;
+		bool operator==(Class const& right) const {return _num == right._num;}
+		bool operator!=(Class const& right) const {return _num != right._num;}
+		bool operator>(Class const& right) const {return _num > right._num;}
+		bool operator<(Class const& right) const {return _num < right._num;}
+		bool operator>=(Class const& right) const {return _num >= right._num;}
+		bool operator<=(Class const& right) const {return _num <= right._num;}
+
+		int getNum() const {return _num;}
 };
 
-// Surcharge de l'opérateur << pour pouvoir afficher un objet Awesome avec std::cout
-std::ostream & operator<<(std::ostream & o, const Awesome &a) { o << a.get_n(); return o; }
-// ----------------------------------------------
+std::ostream& operator<<(std::ostream& out, Class const& a) {
+	out << a.getNum();
+	return out;
+}
+
+void printTitle(std::string title) {std::cout << GREEN << title << RES << std::endl;}
 
 int main(void) {
-    std::cout << "--- TESTS BASIQUES (Sujet 42) ---" << std::endl;
-    int a = 2;
-    int b = 3;
-    
-    ::swap( a, b );
-    std::cout << "a = " << a << ", b = " << b << std::endl;
-    std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
-    
-    std::string c = "chaine1";
-    std::string d = "chaine2";
-    
-    ::swap(c, d);
-    std::cout << "c = " << c << ", d = " << d << std::endl;
-    std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-    std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+	printTitle("\n-- 42 Subject --");
 
-    std::cout << "\n--- TESTS CLASSE COMPLEXE (Awesome) ---" << std::endl;
-    Awesome aw1(21);
-    Awesome aw2(42);
+	int a = 2, b = 3;
 
-    std::cout << "Avant swap: aw1 = " << aw1 << ", aw2 = " << aw2 << std::endl;
-    ::swap(aw1, aw2);
-    std::cout << "Apres swap: aw1 = " << aw1 << ", aw2 = " << aw2 << std::endl;
-    std::cout << "Max entre aw1 et aw2: " << ::max(aw1, aw2) << std::endl;
-    std::cout << "Min entre aw1 et aw2: " << ::min(aw1, aw2) << std::endl;
+	std::cout << "a = " << a << "\tb = " << b << std::endl;
+	::swap(a, b);
+	std::cout << "a = " << a << "\tb = " << b << std::endl;
+	std::cout << "min(a, b) = " << ::min(a, b) << std::endl;
+	std::cout << "max(a, b) = " << ::max(a, b) << std::endl;
 
-    return 0;
+	std::string string1 = "Hello World!";
+	std::string string2 = "Hello Underworld!";
+	std::cout << "string1 = " << string1 << "\t\tstring2 = " << string2 << std::endl;
+	::swap(string1, string2);
+	std::cout << "string1 = " << string1 << "\tstring2 = " << string2 << std::endl;
+	std::cout << "min(string1, string2) = " << ::min(string1, string2) << std::endl;
+	std::cout << "max(string1, string2) = " << ::max(string1, string2) << std::endl;
+
+	printTitle("\n-- Complex Class --");
+	Class class1(42);
+	Class class2(24);
+
+	std::cout << "class1 = " << class1 << "\tclass2 = " << class2 << std::endl;
+	::swap(class1, class2);
+	std::cout << "class1 = " << class1 << "\tclass2 = " << class2 << std::endl;
+	std::cout << "min(class1, class2) = " << ::min(class1, class2) << std::endl;
+	std::cout << "max(class1, class2) = " << ::max(class1, class2) << std::endl;
+
+	return 0;
 }
