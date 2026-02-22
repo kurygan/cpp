@@ -24,7 +24,7 @@ Form&	Form::operator=(Form const& copy) {
 
 void	Form::beSigned(Bureaucrat& bureaucrat) {
 	if (bureaucrat.getGrade() > this->_signGrade) throw GradeTooLowException();
-	this->_isSigned = true;
+	else this->_isSigned = true;
 }
 
 std::string const Form::getName() const {return this->_name;}
