@@ -1,72 +1,73 @@
 #include <iostream>
 #include "Bureaucrat.hpp"
 
-void    testHeader(std::string title) {
-    std::cout << std::endl << "\033[1;32m---------------------------------------" << std::endl;
-    std::cout << "TEST: " << title << std::endl;
-    std::cout << "---------------------------------------\033[0m" << std::endl;
+#define YELLOW "\033[1;33m"
+#define RESET "\033[0m"
+
+void printTitle(std::string const &title) {
+	std::cout << std::endl << YELLOW << title << RESET << std::endl;
 }
 
 int main() {
 
-	testHeader("CONSTRUCTION NORMALE");
+	printTitle("-- Default Construction --");
 	try {
-		Bureaucrat bob("Bob", 1);
-		std::cout << bob << std::endl;
+		Bureaucrat donovan("Donovan", 1);
+		std::cout << donovan << std::endl;
 
-		Bureaucrat bill("Bill", 150);
-		std::cout << bill << std::endl;
+		Bureaucrat benoit("Benoit", 150);
+		std::cout << benoit << std::endl;
 	}
 	catch (std::exception &e) {
 		std::cout << "Exception: " << e.what() << std::endl;
 	}
 
-	testHeader("ERREUR: GRADE TROP HAUT (0)");
+	printTitle("-- Error Test: Grade too High --");
 	try {
-		Bureaucrat god("God", 0);
-		std::cout << "Ce message ne devrait pas s'afficher !" << std::endl;
+		Bureaucrat nan("Does not exist", 0);
+		std::cout << "Non displayable (normally)" << std::endl;
 	}
 	catch (std::exception &e) {
-		std::cerr << "Exception attrapée : " << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
-	testHeader("ERREUR: GRADE TROP BAS (151)");
+	printTitle("-- Error Test: Grade too Low --");
 	try {
-		Bureaucrat stagiaire("Stagiaire", 151);
-		std::cout << "Ce message ne devrait pas s'afficher !" << std::endl;
+		Bureaucrat nan("Non-Existent", 151);
+		std::cout << "Non displayable (normally)" << std::endl;
 	}
 	catch (std::exception &e) {
-		std::cerr << "Exception attrapée : " << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
-	testHeader("INCREMENTATION LIMITE (1 -> 0)");
+	printTitle("-- Error Test: Increment limits --");
 	try {
-		Bureaucrat boss("Big Boss", 2);
-		std::cout << "Avant : " << boss << std::endl;
+		Bureaucrat boss("Boss", 2);
+		std::cout << "Stage 1: " << boss << std::endl;
 
 		boss.incrementGrade();
-		std::cout << "Après 1 incrément : " << boss << std::endl;
+		std::cout << "Stage 2: " << boss << std::endl;
 
 		boss.incrementGrade();
-		std::cout << "Après 2 incréments : " << boss << std::endl;
+		std::cout << "Stage 3: " << boss << std::endl;
 	}
 	catch (std::exception &e) {
-		std::cerr << "Exception attrapée : " << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
-    testHeader("DECREMENTATION LIMITE (149 -> 151)");
-    try {
-		Bureaucrat dave("Dave", 149);
-		std::cout << "Avant : " << dave << std::endl;
+	printTitle("-- Error Test: Decrement limits --");
+	try {
+		Bureaucrat janitor("Janitor", 149);
+		std::cout << "Stage 1: " << janitor << std::endl;
 
-		dave.decrementGrade();
-		std::cout << "Après 1 décrément : " << dave << std::endl;
+		janitor.decrementGrade();
+		std::cout << "Stage 2: " << janitor << std::endl;
 
-		dave.decrementGrade();
-		std::cout << "Après 2 décréments : " << dave << std::endl;
+		janitor.decrementGrade();
+		std::cout << "Stage 3: " << janitor << std::endl;
 	}
 	catch (std::exception &e) {
-		std::cerr << "Exception attrapée : " << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
 	return 0;
