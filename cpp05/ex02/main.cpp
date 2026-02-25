@@ -4,63 +4,68 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
+#define YELLOW "\033[1;33m"
+#define RED    "\033[31m"
+#define GREEN  "\033[32m"
+#define BLUE   "\033[34m"
+#define RESET  "\033[0m"
+
+void printTitle(std::string const &title) {
+	std::cout << std::endl << YELLOW << "-- " + title + " --" << RESET << std::endl;
+}
+
 int main() {
-    // 1. Initialisation du générateur de nombres aléatoires pour la Robotomie
+	Bureaucrat boss("Le Boss", 1);
+	Bureaucrat intern("Intern", 150);
+	Bureaucrat mid("Mid", 40);
 
-    std::cout << "--- Initialisation des Bureaucrates ---" << std::endl;
-    Bureaucrat boss("Le Boss", 1);
-    Bureaucrat stagiaire("Stagiaire", 150);
-    Bureaucrat mid("Cadre Moyen", 40);
+	AForm* shrub = new ShrubberyCreationForm("Garden");
+	AForm* robot = new RobotomyRequestForm("Bender");
+	AForm* pardon = new PresidentialPardonForm("Obama");
 
-    std::cout << "\n--- Création des Formulaires (Polymorphisme) ---" << std::endl;
-    // On utilise des pointeurs sur la classe de base pour tester le polymorphisme
-    AForm* shrub = new ShrubberyCreationForm("jardin");
-    AForm* robot = new RobotomyRequestForm("Bender");
-    AForm* pardon = new PresidentialPardonForm("Arnaud Montebourg");
+	printTitle("Test 1: Intern signing");
+	try {
+		intern.signForm(*shrub);
+	} catch (std::exception &e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
 
-    std::cout << "\n--- TEST 1 : Le Stagiaire essaie de tout signer ---" << std::endl;
-    try {
-        stagiaire.signForm(*shrub);
-    } catch (std::exception &e) {
-        std::cerr << "Erreur : " << e.what() << std::endl;
-    }
+	printTitle("Test 2: Shrubbery Sign and Execute");
+	try {
+		boss.signForm(*shrub);
+		boss.executeForm(*shrub);
+	} catch (std::exception &e) {
+		std::cerr << "Error: " << e.what() << std::endl;
+	}
 
-    std::cout << "\n--- TEST 2 : Signature et Exécution du Shrubbery ---" << std::endl;
-    try {
-        boss.signForm(*shrub);
-        boss.executeForm(*shrub); // Devrait créer le fichier jardin_shrubbery
-    } catch (std::exception &e) {
-        std::cerr << "Erreur : " << e.what() << std::endl;
-    }
+	std::cout << "\n--- TEST 3 : Robotomie (50% de chance) ---" << std::endl;
+	try {
+		boss.signForm(*robot);
+		mid.executeForm(*robot); // Le cadre moyen (grade 40) peut executer la robotomie (grade 45)
+		boss.executeForm(*robot);
+	} catch (std::exception &e) {
+		std::cerr << "Erreur : " << e.what() << std::endl;
+	}
 
-    std::cout << "\n--- TEST 3 : Robotomie (50% de chance) ---" << std::endl;
-    try {
-        boss.signForm(*robot);
-        mid.executeForm(*robot); // Le cadre moyen (grade 40) peut executer la robotomie (grade 45)
-        boss.executeForm(*robot);
-    } catch (std::exception &e) {
-        std::cerr << "Erreur : " << e.what() << std::endl;
-    }
+	std::cout << "\n--- TEST 4 : Pardon Présidentiel (Trop dur pour le mid) ---" << std::endl;
+	try {
+		boss.signForm(*pardon);
+		mid.executeForm(*pardon); // Devrait échouer (besoin du grade 5)
+	} catch (std::exception &e) {
+		std::cout << "Normal: " << mid.getName() << " a échoué car : " << e.what() << std::endl;
+	}
 
-    std::cout << "\n--- TEST 4 : Pardon Présidentiel (Trop dur pour le mid) ---" << std::endl;
-    try {
-        boss.signForm(*pardon);
-        mid.executeForm(*pardon); // Devrait échouer (besoin du grade 5)
-    } catch (std::exception &e) {
-        std::cout << "Normal: " << mid.getName() << " a échoué car : " << e.what() << std::endl;
-    }
+	std::cout << "\n--- TEST 5 : Pardon Présidentiel (Le Boss s'en occupe) ---" << std::endl;
+	try {
+		boss.executeForm(*pardon);
+	} catch (std::exception &e) {
+		std::cerr << "Erreur : " << e.what() << std::endl;
+	}
 
-    std::cout << "\n--- TEST 5 : Pardon Présidentiel (Le Boss s'en occupe) ---" << std::endl;
-    try {
-        boss.executeForm(*pardon);
-    } catch (std::exception &e) {
-        std::cerr << "Erreur : " << e.what() << std::endl;
-    }
+	std::cout << "\n--- Nettoyage de la mémoire ---" << std::endl;
+	delete shrub;
+	delete robot;
+	delete pardon;
 
-    std::cout << "\n--- Nettoyage de la mémoire ---" << std::endl;
-    delete shrub;
-    delete robot;
-    delete pardon;
-
-    return 0;
+	return 0;
 }
