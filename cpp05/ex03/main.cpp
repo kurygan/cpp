@@ -3,40 +3,44 @@
 #include "Bureaucrat.hpp"
 #include "AForm.hpp" 
 
-void testIntern(Intern& intern, const std::string& formName, const std::string& target) {
-    std::cout << "\n-----------------------------------------------------" << std::endl;
-    std::cout << "TEST: Demande de création de '" << formName << "' sur '" << target << "'" << std::endl;
-    
-    AForm* form = NULL;
-    
-    try {
-        form = intern.makeForm(formName, target);
+#define YELLOW "\033[1;33m"
+#define RED    "\033[31m"
+#define GREEN  "\033[32m"
+#define BLUE   "\033[34m"
+#define RESET  "\033[0m"
 
-        if (form) {
-            std::cout << "✅ SUCCÈS : Le formulaire " << *form << " a été créé !" << std::endl;
-            Bureaucrat boss("The Boss", 1);
-            boss.signForm(*form);
-            boss.executeForm(*form);
-            delete form;
-        } else {
-            std::cout << "❌ ÉCHEC : Le pointeur retourné est NULL." << std::endl;
-        }
-    } catch (std::exception& e) {
-        std::cout << "❌ EXCEPTION : " << e.what() << std::endl;
-    }
+void printTitle(std::string const &title) {
+	std::cout << std::endl << YELLOW << "-- " + title + " --" << RESET << std::endl;
+}
+
+void testIntern(Intern& intern, const std::string& formName, const std::string& target) {
+	std::cout << "\n-----------------------------------------------------" << std::endl;
+	std::cout << "Creation of '" << formName << "' on '" << target << "'" << std::endl;
+
+	AForm* form = NULL;
+
+	try {
+		form = intern.makeForm(formName, target);
+
+		std::cout << "The Form:\n " << *form << std::endl;
+		Bureaucrat boss("The Boss", 1);
+		boss.signForm(*form);
+		boss.executeForm(*form);
+		delete form;
+	} catch (std::exception& e) {
+		std::cout << "Error: " << e.what() << std::endl;
+	}
 }
 
 int main() {
-    std::cout << "=== DÉBUT DES TESTS DU STAGIAIRE (INTERN) ===" << std::endl;
+	printTitle("Intern Testing");
 
-    Intern someRandomIntern;
+	Intern someRandomIntern;
 
-    testIntern(someRandomIntern, "robotomy request", "Bender");
-    testIntern(someRandomIntern, "shrubbery creation", "Jardin");
-    testIntern(someRandomIntern, "presidential pardon", "Hannibal Lecter");
+	testIntern(someRandomIntern, "robotomy request", "Bender");
+	testIntern(someRandomIntern, "shrubbery creation", "Jardin");
+	testIntern(someRandomIntern, "presidential pardon", "Hannibal Lecter");
 
-    testIntern(someRandomIntern, "demande d'augmentation", "Moi");
-
-    std::cout << "\n=== FIN DES TESTS ===" << std::endl;
-    return 0;
+	testIntern(someRandomIntern, "demande d'augmentation", "Moi");
+	return 0;
 }

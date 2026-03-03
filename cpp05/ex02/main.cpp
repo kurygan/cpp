@@ -30,7 +30,7 @@ int main() {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
-	printTitle("Test 2: Shrubbery Sign and Execute");
+	printTitle("Test 2: Shrubbery Creation");
 	try {
 		boss.signForm(*shrub);
 		boss.executeForm(*shrub);
@@ -38,31 +38,30 @@ int main() {
 		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n--- TEST 3 : Robotomie (50% de chance) ---" << std::endl;
+	printTitle("Test 3: Robotomy Request");
 	try {
 		boss.signForm(*robot);
-		mid.executeForm(*robot); // Le cadre moyen (grade 40) peut executer la robotomie (grade 45)
+		mid.executeForm(*robot);
 		boss.executeForm(*robot);
 	} catch (std::exception &e) {
-		std::cerr << "Erreur : " << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n--- TEST 4 : Pardon Présidentiel (Trop dur pour le mid) ---" << std::endl;
+	printTitle("Test 4: Presidential Pardon (Should Fail!)");
 	try {
 		boss.signForm(*pardon);
-		mid.executeForm(*pardon); // Devrait échouer (besoin du grade 5)
+		mid.executeForm(*pardon);
 	} catch (std::exception &e) {
-		std::cout << "Normal: " << mid.getName() << " a échoué car : " << e.what() << std::endl;
+		std::cout << "Bureaucrat " << mid.getName() << " failed because " << e.what() << std::endl;
 	}
 
-	std::cout << "\n--- TEST 5 : Pardon Présidentiel (Le Boss s'en occupe) ---" << std::endl;
+	printTitle("TEST 5 : Presidential Pardon (Shouldn't Fail!)");
 	try {
 		boss.executeForm(*pardon);
 	} catch (std::exception &e) {
-		std::cerr << "Erreur : " << e.what() << std::endl;
+		std::cerr << "Error: " << e.what() << std::endl;
 	}
 
-	std::cout << "\n--- Nettoyage de la mémoire ---" << std::endl;
 	delete shrub;
 	delete robot;
 	delete pardon;
