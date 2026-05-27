@@ -1,7 +1,7 @@
 #include "Base.h"
 
 int main() {
-	std::srand(static_cast<unsigned int>(std::time(0)));
+	std::srand(std::time(0));
 
 	for (int i = 0; i < 5; i++) {
 		std::cout << "\nTest " << i + 1 << ":" << std::endl;
